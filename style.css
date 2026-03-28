@@ -1,0 +1,147 @@
+/* Sélecteur universel : s'applique à tous les éléments de la page */
+*{
+    margin: 0; /* Supprime les marges par défaut des éléments HTML */
+    padding: 0; /* Supprime les espacements internes par défaut */
+    font-family: 'Poppins', sans-serif; /* Définit la police utilisée sur toute la page */
+    box-sizing: border-box; /* Inclut padding et border dans la taille totale des éléments */
+}
+
+/* Couleur d'arrière-plan du site */
+body{
+    background: #222; /* Fond gris très sombre pour toute la page */
+}
+
+/* Carte principale contenant l'application météo */
+.card{
+    width: 90%; /* La carte prend 90% de la largeur de la page */
+    max-width: 470px; /* Mais ne dépasse jamais 470px */
+    
+    /* Dégradé de couleur en diagonale */
+    background: linear-gradient(135deg, #2a00fe, #1983ec);
+
+    color: #fff; /* Couleur du texte : blanc */
+
+    /* Centre la carte horizontalement et ajoute un espace en haut */
+    margin: 100px auto 0;
+
+    border-radius: 20px; /* Coins arrondis */
+
+    padding: 40px 35px; /* Espacement intérieur */
+
+    text-align: center; /* Centre le texte */
+}
+
+/* Zone contenant la barre de recherche */
+.search{
+    width: 100%; /* Occupe toute la largeur de la carte */
+
+    display: flex; /* Active Flexbox pour aligner les éléments */
+
+    align-items: center; /* Aligne verticalement les éléments */
+
+    justify-content: space-between; 
+    /* Met de l'espace entre le champ de recherche et le bouton */
+}
+
+/* Champ de texte pour entrer la ville */
+.search input{
+    border: 0; /* Supprime la bordure */
+    outline: 0; /* Supprime le contour bleu quand on clique */
+    
+    background: #ebfffc; /* Couleur de fond du champ */
+
+    color: #555; /* Couleur du texte */
+
+    padding: 10px 25px; /* Espacement interne */
+
+    height: 60px; /* Hauteur du champ */
+
+    border-radius: 30px; /* Rend le champ arrondi */
+
+    flex: 1; 
+    /* Permet à l'input de prendre tout l'espace disponible */
+
+    margin-right: 16px; /* Espace entre l'input et le bouton */
+
+    font-size: 18px; /* Taille du texte */
+}
+
+/* Bouton de recherche */
+.search button {
+    border: 0; /* Supprime la bordure */
+    outline: 0; /* Supprime le contour */
+
+    background: #ebfffc; /* Couleur de fond */
+
+    border-radius: 50%; /* Rend le bouton circulaire */
+
+    width: 60px; /* Largeur du bouton */
+    height: 60px; /* Hauteur du bouton */
+
+    cursor: pointer; /* Change le curseur en main au survol */
+}
+
+/* Image à l'intérieur du bouton (icône loupe) */
+.search button img{
+    width: 16px; /* Taille de l'image */
+}
+
+/* Icône principale de la météo */
+.weather-icon{
+    width:170px; /* Largeur de l'image météo */
+    margin-top: 30px; /* Espace au-dessus de l'image */
+}
+
+/* Température affichée */
+.weather h1{
+    font-size: 80px; /* Très grande taille pour la température */
+    font-weight: 500; /* Épaisseur moyenne de la police */
+}
+
+/* Nom de la ville */
+.weather h2{
+    font-size: 45px; /* Taille du texte */
+    font-weight: 400; /* Police un peu plus légère */
+
+    margin-top: -10px; 
+    /* Remonte légèrement le texte vers le haut */
+}
+
+/* Section contenant humidité et vent */
+.details{
+    display: flex; /* Active Flexbox */
+
+    align-items: center; /* Centre verticalement les éléments */
+
+    justify-content: space-between; 
+    /* Espace égal entre les colonnes */
+
+    padding: 0 20px; /* Espacement gauche/droite */
+
+    margin-top: 50px; /* Espace au-dessus de la section */
+}
+
+/* Chaque colonne (vent ou humidité) */
+.col{
+    display: flex; /* Permet d'aligner l'icône et le texte */
+
+    align-items: center; /* Centre verticalement */
+
+    text-align: left; /* Texte aligné à gauche */
+}
+
+/* Icônes dans les colonnes */
+.col img{
+    width: 40px; /* Taille de l'icône */
+
+    margin-right: 10px; 
+    /* Espace entre l'image et le texte */
+}
+
+/* Style des valeurs d'humidité et de vent */
+.humidity, .wind{
+    font-size: 28px; /* Taille du texte */
+
+    margin-top: -6px; 
+    /* Remonte légèrement le texte pour un meilleur alignement */
+}

@@ -1,0 +1,142 @@
+<!DOCTYPE html> <!-- Indique au navigateur que le document est en HTML5 -->
+<html lang="en"> <!-- Début du document HTML, langue principale : anglais -->
+
+<head>
+    <meta charset="UTF-8"> <!-- Permet d'afficher correctement les caractères (accents, etc.) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Rend la page responsive sur mobile -->
+    <title>Weather App</title> <!-- Titre affiché dans l'onglet du navigateur -->
+    <link rel="stylesheet" href="style.css"> <!-- Lien vers le fichier CSS qui gère le style -->
+</head>
+
+<body> <!-- Début du contenu visible de la page -->
+
+    <div class="card"> <!-- Conteneur principal de l'application météo -->
+
+        <div class="search"> <!-- Section contenant la barre de recherche -->
+
+            <!-- Champ texte où l'utilisateur tape le nom d'une ville -->
+            <input type="text" placeholder="Entrez le nom de la ville" spellcheck="false">
+
+            <!-- Bouton pour lancer la recherche -->
+            <button>
+                <img src="images/search.png"> <!-- Icône de loupe -->
+            </button>
+
+        </div>
+
+        <div class="weather"> <!-- Section qui affiche les informations météo -->
+
+            <!-- Icône météo (pluie par défaut) -->
+            <img src="images/rain.png" class="weather-icon">
+
+            <!-- Température -->
+            <h1 class="temp">25°C</h1>
+
+            <!-- Nom de la ville -->
+            <h2 class="city">Bandjoun</h2>
+
+            <div class="details"> <!-- Conteneur des détails météo -->
+
+                <div class="col"> <!-- Colonne pour l'humidité -->
+
+                    <img src="images/humidity.png"> <!-- Icône humidité -->
+
+                    <div>
+                        <p class="humidity">50%</p> <!-- Valeur de l'humidité -->
+                        <p>humidité</p> <!-- Texte descriptif -->
+                    </div>
+
+                </div>
+
+                <div class="col"> <!-- Colonne pour la vitesse du vent -->
+
+                    <img src="images/wind.png"> <!-- Icône du vent -->
+
+                    <div>
+                        <p class="wind">15 Km/h</p> <!-- Valeur du vent -->
+                        <p>Vitesse du vent</p> <!-- Texte descriptif -->
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+<script> // Début du code JavaScript
+
+    // Clé API permettant d'accéder aux données météo d'OpenWeatherMap
+    const apiKey = "d56e056cf3dbaa33dad758875b59007d";
+
+    // URL de base de l'API météo (unités en degrés Celsius)
+    const apiUrl = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=";
+
+    // Sélection du champ de saisie de la ville
+    const searchBox = document.querySelector(".search input");
+
+    // Sélection du bouton de recherche
+    const searchBtn = document.querySelector(".search button");
+
+    // Sélection de l'image représentant la météo
+    const weatherIcon = document.querySelector(".weather-icon");
+
+    // Fonction asynchrone qui récupère la météo d'une ville
+    async function checkWeather(city) {
+
+        // Envoie une requête à l'API avec le nom de la ville et la clé API
+        const response = await fetch(`${apiUrl}${city}&appid=${apiKey}`);
+
+        // Conversion de la réponse en objet JSON
+        var data = await response.json();
+
+        // Affiche les données dans la console (utile pour le débogage)
+        console.log(data);
+
+        // Mise à jour du nom de la ville dans la page
+        document.querySelector(".city").innerHTML = data.name;
+
+        // Mise à jour de la température
+        document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
+
+        // Mise à jour de l'humidité
+        document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+
+        // Mise à jour de la vitesse du vent
+        document.querySelector(".wind").innerHTML = data.wind.speed + " Km/h";
+
+        // Changement de l'icône météo en fonction du climat
+        if(data.weather[0].main == "Clouds"){ // Si le climat est nuageux
+            weatherIcon.src = "images/clouds.png";
+
+        }else if(data.weather[0].main == "Clear"){ // Si le ciel est dégagé
+            weatherIcon.src = "images/clear.png";
+
+        }else if(data.weather[0].main == "Rain"){ // Si il pleut
+            weatherIcon.src = "images/rain.png";
+
+        }else if(data.weather[0].main == "Drizzle"){ // Petite pluie
+            weatherIcon.src = "images/drizzle.png";
+
+        }else if(data.weather[0].main == "Mist"){ // Brouillard
+            weatherIcon.src = "images/mist.png";
+        }
+
+        // Rend la section météo visible
+        document.querySelector(".weather").style.display = "block"
+    }
+
+    // Ajoute un événement sur le bouton de recherche
+    searchBtn.addEventListener("click", ()=>{
+
+        // Appelle la fonction météo avec la ville tapée
+        checkWeather(searchBox.value);
+
+    });
+
+    // Appel de la fonction au chargement de la page (sans ville pour l'instant)
+    checkWeather();
+
+</script>
+
+</body> <!-- Fin du contenu -->
+</html> <!-- Fin du document HTML -->
